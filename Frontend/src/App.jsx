@@ -18,10 +18,18 @@ function App() {
     prism.highlightAll()
   }, [])
 
-  async function reviewCode() {
-    const response = await axios.post('https://ai-code-reviewer-backend-zlyr.onrender.com', { code })
-    setReview(response.data)
+async function reviewCode() {
+  try {
+    const response = await axios.post(
+      'https://ai-code-reviewer-backend-zlyr.onrender.com/ai/get-review',
+      { code }
+    );
+    setReview(response.data);
+  } catch (error) {
+    console.error("API Error:", error);
   }
+}
+
 
   return (
     <>
